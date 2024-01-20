@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np 
 
 
-df_original = pd.read_csv('2023_LoL_esports.csv')
+df_original = pd.read_csv('Dados Originais.csv')
 df_tratado = pd.read_csv('Dados_Tratados_1212.csv')
 
 df_original['side'], _ = pd.factorize(df_original['side'])
@@ -29,16 +29,6 @@ correlation_matrix_result_original = df_original.corr()
 plt.figure(figsize=(12, 10))
 sns.heatmap(correlation_matrix_result_original, annot=False, cmap='coolwarm', fmt=".2f")
 plt.title('Matriz de Correlacao - Result Original')
-plt.show()
-
-threshold = 0.1  
-low_correlation_vars_result_original = correlation_matrix_result_original[abs(correlation_matrix_result_original['result']) < threshold].index
-df_selected_result_original = df_original.drop(low_correlation_vars_result_original, axis=1)
-
-correlation_matrix_selected_result_original = df_selected_result_original.corr()
-plt.figure(figsize=(12, 10))
-sns.heatmap(correlation_matrix_selected_result_original, annot=False, cmap='coolwarm', fmt=".2f")
-plt.title('Matriz de Correlacao - Result Original (Apos Selecao)')
 plt.show()
 
 
@@ -64,16 +54,6 @@ sns.heatmap(correlation_matrix_result_tratado, annot=False, cmap='coolwarm', fmt
 plt.title('Matriz de Correlacao - Result Tratado')
 plt.show()
 
-threshold = 0.1  
-low_correlation_vars_result_tratado = correlation_matrix_result_tratado[abs(correlation_matrix_result_tratado['result']) < threshold].index
-df_selected_result_tratado = df_tratado.drop(low_correlation_vars_result_tratado, axis=1)
-
-correlation_matrix_selected_result_tratado = df_selected_result_tratado.corr()
-plt.figure(figsize=(12, 10))
-sns.heatmap(correlation_matrix_selected_result_tratado, annot=False, cmap='coolwarm', fmt=".2f")
-plt.title('Matriz de Correlacao - Result Tratado (Apos Selecao)')
-plt.show()
-
 rf_result_tratado = RandomForestClassifier()
 rf_result_tratado.fit(X_train_result_tratado, y_train_result_tratado)
 
@@ -97,16 +77,6 @@ sns.heatmap(correlation_matrix_league_original, annot=False, cmap='coolwarm', fm
 plt.title('Matriz de Correlacao - League Original')
 plt.show()
 
-threshold = 0.1  
-low_correlation_vars_league_original = correlation_matrix_league_original[abs(correlation_matrix_league_original['league']) < threshold].index
-df_selected_league_original = df_original.drop(low_correlation_vars_league_original, axis=1)
-
-correlation_matrix_selected_league_original = df_selected_league_original .corr()
-plt.figure(figsize=(12, 10))
-sns.heatmap(correlation_matrix_selected_league_original, annot=False, cmap='coolwarm', fmt=".2f")
-plt.title('Matriz de Correlacao - League Original (Apos Selecao)')
-plt.show()
-
 rf_league_original = RandomForestClassifier()
 rf_league_original.fit(X_train_league_original, y_train_league_original)
 
@@ -128,17 +98,6 @@ plt.figure(figsize=(12, 10))
 sns.heatmap(correlation_matrix_league_tratado, annot=False, cmap='coolwarm', fmt=".2f")
 plt.title('Matriz de Correlacao - League Tratado')
 plt.show()
-
-threshold = 0.1  
-low_correlation_vars_league_tratado = correlation_matrix_league_tratado[abs(correlation_matrix_league_tratado['league']) < threshold].index
-df_selected_league_tratado = df_tratado.drop(low_correlation_vars_league_tratado, axis=1)
-
-correlation_matrix_selected_league_tratado = df_selected_league_tratado .corr()
-plt.figure(figsize=(12, 10))
-sns.heatmap(correlation_matrix_selected_league_tratado, annot=False, cmap='coolwarm', fmt=".2f")
-plt.title(  'Matriz de Correlacao - League Tratado (Apos Selecao)')
-plt.show()
-
 rf_league_tratado = RandomForestClassifier()
 rf_league_tratado.fit(X_train_league_tratado, y_train_league_tratado)
 
