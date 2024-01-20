@@ -69,7 +69,6 @@ def run_random_forest(data, outcome, selected_var):
     for _ in range(num_iterations):
         data_sampled = resample(data, replace=True, n_samples=len(data))
 
-        # Verificar se as colunas selecionadas existem nos dados
         selected_var_existing = [col for col in selected_var if col in data_sampled.columns]
 
         if not selected_var_existing:
@@ -130,7 +129,6 @@ def run_logistic_regression(data, outcome, selected_var):
     for _ in range(num_iterations):
         data_sampled = resample(data, replace=True, n_samples=len(data))
 
-        # Verificar se as colunas selecionadas existem nos dados
         selected_var_existing = [col for col in selected_var if col in data_sampled.columns]
 
         if not selected_var_existing:
@@ -196,7 +194,6 @@ def plot_roc_curve(y_true, y_score, title, filename):
     plt.savefig(filename)   
     
 
-# Substituir valores nulos pela mediana para todo o dataset
 data_original = data_original.fillna(data_original.median())
 data_tratado = data_tratado.fillna(data_tratado.median())
 
